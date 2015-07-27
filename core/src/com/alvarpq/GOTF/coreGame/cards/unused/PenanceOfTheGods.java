@@ -10,7 +10,7 @@ public class PenanceOfTheGods extends SpellCard
 	private RowRequirement target;
 	public PenanceOfTheGods(Player owner)
 	{
-		super(100105, "Penance of the Gods", 10, new Element[]{Element.EARTH, Element.EARTH, Element.EARTH, Element.EARTH, Element.EARTH}, owner);
+		super(100105, "Penance of the Gods", 10, new Element[]{Element.EARTH, Element.EARTH, Element.EARTH, Element.EARTH, Element.EARTH}, "", owner);
 		target = new RowRequirement();
 		setRequirements(new Requirement[]{target});
 	}

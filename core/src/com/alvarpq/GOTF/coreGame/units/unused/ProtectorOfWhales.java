@@ -17,7 +17,7 @@ public class ProtectorOfWhales extends Unit implements PresenceApplier
 		{
 			if(Arrays.asList(unit.getSubtypes()).contains("Whale"))
 			{
-				unit.applyEffect(new Presence("Untargetable", 0, 0, 0, 0, true));
+				unit.applyEffect(new Presence("Untargetable", 0, 0, 0, 0, true, unit));
 			}
 		}
 	}

@@ -11,7 +11,7 @@ public class VorgasFireBomb extends SpellCard
 	private UnitRequirement target;
 	public VorgasFireBomb(Player owner)
 	{
-		super(110107, "Vorgas' Fire Bomb", 3, new Element[]{Element.EARTH, Element.FIRE}, owner);
+		super(110107, "Vorgas' Fire Bomb", 3, new Element[]{Element.EARTH, Element.FIRE}, "Vorgas' Fire Bomb deals 4 damage to target unit.", owner);
 		target = new UnitRequirement(RequirementType.UNIT);
 		setRequirements(new Requirement[]{target});
 	}

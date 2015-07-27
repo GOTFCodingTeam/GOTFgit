@@ -8,6 +8,6 @@ public class JumpingWhaleCard extends UnitCard
 {
 	public JumpingWhaleCard(Player owner)
 	{
-		super(100104, "Jumping Whale", 2, new Element[]{Element.AIR, Element.WATER}, owner, new UnitFactory(JumpingWhale.class));
+		super(100104, "Jumping Whale", 2, new Element[]{Element.AIR, Element.WATER}, "", owner, new UnitFactory(JumpingWhale.class));
 	}
 }

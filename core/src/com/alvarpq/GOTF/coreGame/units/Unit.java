@@ -93,6 +93,7 @@ public abstract class Unit
 	 * @param baseMove the base move of the unit
 	 * @param baseTargetable the base targetable value of the unit
 	 * @param subtypes the unit's subtypes
+	 * * @param description the description of the unit
 	 * @param row the row of the unit
 	 * @param column the column of the unit
 	 */

@@ -8,6 +8,6 @@ public class DarkYounglingCard extends UnitCard
 {
 	public DarkYounglingCard(Player owner)
 	{
-		super(100101, "Dark Youngling", 1, new Element[]{Element.EARTH}, owner, new UnitFactory(DarkYoungling.class));
+		super(100101, "Dark Youngling", 1, new Element[]{Element.EARTH}, "", owner, new UnitFactory(DarkYoungling.class));
 	}
 }

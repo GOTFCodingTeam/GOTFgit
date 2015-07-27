@@ -8,6 +8,6 @@ public class VorgasCloneCard extends UnitCard
 {
 	public VorgasCloneCard(Player owner)
 	{
-		super(110115, "Vorgas' Clone", 2, new Element[]{Element.EARTH}, owner, new UnitFactory(VorgasClone.class));
+		super(110115, "Vorgas' Clone", 2, new Element[]{Element.EARTH}, "Haste, Coward", owner, new UnitFactory(VorgasClone.class));
 	}
 }

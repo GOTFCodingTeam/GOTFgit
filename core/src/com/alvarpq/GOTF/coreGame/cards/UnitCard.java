@@ -29,9 +29,9 @@ public abstract class UnitCard extends Card
 	 * @param owner the owner of the card
 	 * @param unitFactory the unitFactory used to spawn units
 	 */
-	public UnitCard(int id, String name, int resourceCost, Element[] elementCost, Player owner, UnitFactory unitFactory)
+	public UnitCard(int id, String name, int resourceCost, Element[] elementCost, String description, Player owner, UnitFactory unitFactory)
 	{
-		super(id, name, resourceCost, elementCost, owner);
+		super(id, name, resourceCost, elementCost, description, owner);
 		position = new TileRequirement(RequirementType.OWN_EMPTY_TILE);
 		setRequirements(new Requirement[]{position});
 		this.unitFactory = unitFactory;

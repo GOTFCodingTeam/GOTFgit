@@ -8,6 +8,6 @@ public class TunnelGuardCard extends UnitCard
 {
 	public TunnelGuardCard(Player owner)
 	{
-		super(100107, "Tunnel Guard", 3, new Element[]{Element.EARTH}, owner, new UnitFactory(TunnelGuard.class));
+		super(100107, "Tunnel Guard", 3, new Element[]{Element.EARTH}, "", owner, new UnitFactory(TunnelGuard.class));
 	}
 }

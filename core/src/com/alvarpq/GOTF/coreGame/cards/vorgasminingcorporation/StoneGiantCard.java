@@ -8,6 +8,6 @@ public class StoneGiantCard extends UnitCard
 {
 	public StoneGiantCard(Player owner)
 	{
-		super(110105, "Stone Giant", 4, new Element[]{Element.EARTH}, owner, new UnitFactory(StoneGiant.class));
+		super(110105, "Stone Giant", 4, new Element[]{Element.EARTH}, "", owner, new UnitFactory(StoneGiant.class));
 	}
 }

@@ -8,6 +8,6 @@ public class GoblinWarriorCard extends UnitCard
 {
 	public GoblinWarriorCard(Player owner)
 	{
-		super(110103, "Goblin Warrior", 2, new Element[]{Element.EARTH}, owner, new UnitFactory(GoblinWarrior.class));
+		super(110103, "Goblin Warrior", 2, new Element[]{Element.EARTH}, "", owner, new UnitFactory(GoblinWarrior.class));
 	}
 }

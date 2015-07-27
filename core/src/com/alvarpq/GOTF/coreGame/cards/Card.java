@@ -28,6 +28,10 @@ public abstract class Card
 	 */
 	private List<Element> elementCost;
 	/**
+	 * The card's description
+	 */
+	private String description;
+	/**
 	 * The requirements needed to be fulfilled before playing the card.
 	 */
 	private Requirement[] requirements;
@@ -41,14 +45,16 @@ public abstract class Card
 	 * @param name the name of the card
 	 * @param resourceCost the cost in resources to play the card
 	 * @param elementCost the cost in elements to play the card
+	 * @param description the card's description
 	 * @param owner the owner of the card
 	 */
-	public Card(int id, String name, int resourceCost, Element[] elementCost, Player owner)
+	public Card(int id, String name, int resourceCost, Element[] elementCost, String description, Player owner)
 	{
 		this.id = id;
 		this.name = name;
 		this.resourceCost = resourceCost;
 		this.elementCost = new LinkedList<Element>(Arrays.asList(elementCost));
+		this.description = description;
 		this.requirements = new Requirement[]{};
 		this.owner = owner;
 	}
@@ -150,6 +156,14 @@ public abstract class Card
 	public void setElementCost(List<Element> elementCost)
 	{
 		this.elementCost = elementCost;
+	}
+	/**
+	 * Returns the card's description.
+	 * @return the card's description
+	 */
+	public String getDescription()
+	{
+		return description;
 	}
 	/**
 	 * Returns this card's requirements.

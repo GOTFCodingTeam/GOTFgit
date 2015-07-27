@@ -8,6 +8,6 @@ public class TamedDemonCard extends UnitCard
 {
 	public TamedDemonCard(Player owner)
 	{
-		super(110106, "Tamed Demon", 4, new Element[]{Element.EARTH, Element.FIRE}, owner, new UnitFactory(TamedDemon.class));
+		super(110106, "Tamed Demon", 4, new Element[]{Element.EARTH, Element.FIRE}, "", owner, new UnitFactory(TamedDemon.class));
 	}
 }

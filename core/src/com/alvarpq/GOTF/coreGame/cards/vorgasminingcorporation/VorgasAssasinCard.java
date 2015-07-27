@@ -8,6 +8,6 @@ public class VorgasAssasinCard extends UnitCard
 {
 	public VorgasAssasinCard(Player owner)
 	{
-		super(110112, "Vorgas' Assasin", 3, new Element[]{Element.EARTH, Element.EARTH}, owner, new UnitFactory(VorgasAssasin.class));
+		super(110112, "Vorgas' Assasin", 3, new Element[]{Element.EARTH, Element.EARTH}, "Killer", owner, new UnitFactory(VorgasAssasin.class));
 	}
 }

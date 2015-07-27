@@ -8,6 +8,6 @@ public class RedDevilCard extends UnitCard
 {
 	public RedDevilCard(Player owner)
 	{
-		super(110104, "Red Devil", 1, new Element[]{Element.EARTH}, owner, new UnitFactory(RedDevil.class));
+		super(110104, "Red Devil", 1, new Element[]{Element.EARTH}, "", owner, new UnitFactory(RedDevil.class));
 	}
 }

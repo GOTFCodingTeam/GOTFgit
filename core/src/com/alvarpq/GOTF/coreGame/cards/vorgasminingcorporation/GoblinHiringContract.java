@@ -19,7 +19,7 @@ public class GoblinHiringContract extends SpellCard implements TurnEndedListener
 	public List<Boolean> elementCostDecreased;
 	public GoblinHiringContract(Player owner)
 	{
-		super(110110, "Goblin Hiring Contract", 1, new Element[]{Element.EARTH}, owner);
+		super(110110, "Goblin Hiring Contract", 1, new Element[]{Element.EARTH}, "Goblins you play this turn cost 1 resource and 1 Earth less.", owner);
 		setRequirements(new Requirement[]{});
 		hiredGoblins = new LinkedList<Card>();
 		resourceCostDecreased = new LinkedList<Boolean>();

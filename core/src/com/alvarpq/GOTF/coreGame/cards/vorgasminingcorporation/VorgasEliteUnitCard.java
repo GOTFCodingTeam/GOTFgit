@@ -8,6 +8,6 @@ public class VorgasEliteUnitCard extends UnitCard
 {
 	public VorgasEliteUnitCard(Player owner)
 	{
-		super(110113, "Vorgas' Elite Unit", 3, new Element[]{Element.EARTH}, owner, new UnitFactory(VorgasEliteUnit.class));
+		super(110113, "Vorgas' Elite Unit", 3, new Element[]{Element.EARTH}, "Coward", owner, new UnitFactory(VorgasEliteUnit.class));
 	}
 }

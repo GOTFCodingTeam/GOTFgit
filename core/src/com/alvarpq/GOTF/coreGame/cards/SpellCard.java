@@ -12,9 +12,9 @@ public abstract class SpellCard extends Card
 	 * @param elementCost the cost in elements to play the card
 	 * @param owner the owner of the card
 	 */
-	public SpellCard(int id, String name, int resourceCost, Element[] elementCost, Player owner)
+	public SpellCard(int id, String name, int resourceCost, Element[] elementCost, String description, Player owner)
 	{
-		super(id, name, resourceCost, elementCost, owner);
+		super(id, name, resourceCost, elementCost, description, owner);
 	}
 	/**
 	 * Resets the spell card's requirements.

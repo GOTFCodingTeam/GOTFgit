@@ -10,7 +10,7 @@ public class FuriousGoblins extends SpellCard
 {
 	public FuriousGoblins(Player owner)
 	{
-		super(110108, "Furious Goblins", 2, new Element[]{Element.EARTH, Element.EARTH}, owner);
+		super(110108, "Furious Goblins", 2, new Element[]{Element.EARTH, Element.EARTH}, "Goblins you control have their countdown decreased by 1.", owner);
 		setRequirements(new Requirement[]{});
 	}
 	@Override

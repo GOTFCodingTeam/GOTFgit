@@ -8,6 +8,6 @@ public class RaidGoblinsCard extends UnitCard
 {
 	public RaidGoblinsCard(Player owner)
 	{
-		super(110114, "Raid Goblins", 4, new Element[]{Element.EARTH, Element.EARTH, Element.EARTH}, owner, new UnitFactory(RaidGoblins.class));
+		super(110114, "Raid Goblins", 4, new Element[]{Element.EARTH, Element.EARTH, Element.EARTH}, "Coward", owner, new UnitFactory(RaidGoblins.class));
 	}
 }

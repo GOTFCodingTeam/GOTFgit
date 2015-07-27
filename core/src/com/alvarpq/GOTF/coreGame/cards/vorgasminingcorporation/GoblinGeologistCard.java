@@ -8,6 +8,6 @@ public class GoblinGeologistCard extends UnitCard
 {
 	public GoblinGeologistCard(Player owner)
 	{
-		super(110111, "Goblin Geologist", 2, new Element[]{Element.EARTH}, owner, new UnitFactory(GoblinGeologist.class));
+		super(110111, "Goblin Geologist", 2, new Element[]{Element.EARTH}, "Instead of attacking, Goblin Geologist increases your resources and Earth by 1.", owner, new UnitFactory(GoblinGeologist.class));
 	}
 }
