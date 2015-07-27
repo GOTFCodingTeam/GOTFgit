@@ -447,6 +447,10 @@ public abstract class Unit
 	{
 		this.moveType = moveType;
 	}
+	public List<Effect> getEffects()
+	{
+		return effects;
+	}
 	/**
 	 * Returns the unit as a String.
 	 * @return the unit as a String

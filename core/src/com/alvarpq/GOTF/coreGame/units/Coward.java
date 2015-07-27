@@ -1,16 +1,23 @@
 package com.alvarpq.GOTF.coreGame.units;
+import com.alvarpq.GOTF.coreGame.effect.Permanent;
 import com.alvarpq.GOTF.coreGame.event.UnitHasAttackedEvent;
-public abstract class Coward
+import com.alvarpq.GOTF.coreGame.event.UnitHasAttackedListener;
+public class Coward extends Permanent implements UnitHasAttackedListener
 {
-	public static void onUnitHasAttacked(UnitHasAttackedEvent event, Unit attackUnit)
+	public Coward(Unit owner)
 	{
-		if(event.getAttackUnit()==attackUnit)
+		super("Coward", 0, 0, 0, 0, false, owner);
+	}
+	@Override
+	public void onUnitHasAttacked(UnitHasAttackedEvent event)
+	{
+		if(event.getAttackUnit()==getOwner())
 		{
-			event.getMySide().getHalf().removeUnit(attackUnit);
-			if(attackUnit.getCard()!=null)
+			event.getMySide().getHalf().removeUnit(getOwner());
+			if(getOwner().getCard()!=null)
 			{
-				event.getMySide().getDeck().getDiscardPile().remove(attackUnit.getCard());
-				event.getMySide().getDeck().getHand().add(attackUnit.getCard());
+				event.getMySide().getDeck().getDiscardPile().remove(getOwner().getCard());
+				event.getMySide().getDeck().getHand().add(getOwner().getCard());
 			}
 		}
 	}

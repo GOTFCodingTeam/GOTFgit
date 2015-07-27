@@ -1,12 +1,19 @@
 package com.alvarpq.GOTF.coreGame.units;
+import com.alvarpq.GOTF.coreGame.effect.Permanent;
 import com.alvarpq.GOTF.coreGame.event.UnitCameIntoPlayEvent;
-public abstract class Haste
+import com.alvarpq.GOTF.coreGame.event.UnitCameIntoPlayListener;
+public class Haste extends Permanent implements UnitCameIntoPlayListener
 {
-	public static void onUnitCameIntoPlay(UnitCameIntoPlayEvent event, Unit playedUnit)
+	public Haste(Unit owner)
 	{
-		if(event.getPlayedUnit()==playedUnit)
+		super("Haste", 0, 0, 0, 0, false, owner);
+	}
+	@Override
+	public void onUnitCameIntoPlay(UnitCameIntoPlayEvent event)
+	{
+		if(event.getPlayedUnit()==getOwner())
 		{
-			event.getMySide().getHalf().changeCountdown(playedUnit, -playedUnit.getCountdown());
+			event.getMySide().getHalf().changeCountdown(getOwner(), -getOwner().getBaseCountdown());
 		}
 	}
 }

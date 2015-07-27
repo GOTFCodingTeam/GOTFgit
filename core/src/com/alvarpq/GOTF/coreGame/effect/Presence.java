@@ -1,7 +1,5 @@
 package com.alvarpq.GOTF.coreGame.effect;
-
-import com.alvarpq.GOTF.coreGame.event.Listener;
-
+import com.alvarpq.GOTF.coreGame.units.Unit;
 /**
  * Used for permanent effects on units.
  */
@@ -30,9 +28,9 @@ public class Presence implements Effect
 	/**
 	 * Whether this permanent effect makes the unit untargetable.
 	 */
-	boolean untargetable;
-	Listener addedListener;
-	public Presence(String name, int attack, int baseCountdown, int health, int baseMove, boolean untargetable, Listener addedListener)
+	private boolean untargetable;
+	private Unit owner;
+	public Presence(String name, int attack, int baseCountdown, int health, int baseMove, boolean untargetable, Unit owner)
 	{
 		this.name = name;
 		this.attack = attack;
@@ -40,7 +38,6 @@ public class Presence implements Effect
 		this.health = health;
 		this.baseMove = baseMove;
 		this.untargetable = untargetable;
-		this.addedListener = addedListener;
 	}
 	/**
 	 * Returns the name of the effect.
@@ -97,8 +94,8 @@ public class Presence implements Effect
 		return untargetable;
 	}
 	@Override
-	public Listener addedListener()
+	public Unit getOwner()
 	{
-		return addedListener;
+		return owner;
 	}
 }

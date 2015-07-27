@@ -3,6 +3,7 @@ import java.util.LinkedList;
 import java.util.List;
 import com.alvarpq.GOTF.coreGame.Game;
 import com.alvarpq.GOTF.coreGame.Player;
+import com.alvarpq.GOTF.coreGame.effect.Effect;
 import com.alvarpq.GOTF.coreGame.event.UnitDamagedByUnitEvent;
 import com.alvarpq.GOTF.coreGame.event.UnitDamagedByUnitListener;
 import com.alvarpq.GOTF.coreGame.event.UnitDamagedEvent;
@@ -629,6 +630,13 @@ public class BoardHalf
 				{
 					((UnitKilledByUnitListener)unit).onUnitKilledByUnit((UnitKilledByUnitEvent)event);
 				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitKilledByUnitListener)
+					{
+						((UnitKilledByUnitListener)effect).onUnitKilledByUnit((UnitKilledByUnitEvent)event);
+					}
+				}
 			}
 			event.invertSides();
 			for(Unit unit:game.getSide(owner.otherPlayer()).getHalf().getUnits())
@@ -636,6 +644,13 @@ public class BoardHalf
 				if(unit instanceof UnitKilledByUnitListener)
 				{
 					((UnitKilledByUnitListener)unit).onUnitKilledByUnit((UnitKilledByUnitEvent)event);
+				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitKilledByUnitListener)
+					{
+						((UnitKilledByUnitListener)effect).onUnitKilledByUnit((UnitKilledByUnitEvent)event);
+					}
 				}
 			}
 		}
@@ -647,6 +662,13 @@ public class BoardHalf
 				{
 					((UnitKilledListener)unit).onUnitKilled((UnitKilledEvent)event);
 				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitKilledListener)
+					{
+						((UnitKilledListener)effect).onUnitKilled((UnitKilledEvent)event);
+					}
+				}
 			}
 			event.invertSides();
 			for(Unit unit:game.getSide(owner.otherPlayer()).getHalf().getUnits())
@@ -654,6 +676,13 @@ public class BoardHalf
 				if(unit instanceof UnitKilledListener)
 				{
 					((UnitKilledListener)unit).onUnitKilled((UnitKilledEvent)event);
+				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitKilledListener)
+					{
+						((UnitKilledListener)effect).onUnitKilled((UnitKilledEvent)event);
+					}
 				}
 			}
 		}
@@ -665,6 +694,13 @@ public class BoardHalf
 				{
 					((UnitDamagedByUnitListener)unit).onUnitDamagedByUnit((UnitDamagedByUnitEvent)event);
 				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitDamagedByUnitListener)
+					{
+						((UnitDamagedByUnitListener)effect).onUnitDamagedByUnit((UnitDamagedByUnitEvent)event);
+					}
+				}
 			}
 			event.invertSides();
 			for(Unit unit:game.getSide(owner.otherPlayer()).getHalf().getUnits())
@@ -672,6 +708,13 @@ public class BoardHalf
 				if(unit instanceof UnitDamagedByUnitListener)
 				{
 					((UnitDamagedByUnitListener)unit).onUnitDamagedByUnit((UnitDamagedByUnitEvent)event);
+				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitDamagedByUnitListener)
+					{
+						((UnitDamagedByUnitListener)effect).onUnitDamagedByUnit((UnitDamagedByUnitEvent)event);
+					}
 				}
 			}
 		}
@@ -683,6 +726,13 @@ public class BoardHalf
 				{
 					((UnitDamagedListener)unit).onUnitDamaged((UnitDamagedEvent)event);
 				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitDamagedListener)
+					{
+						((UnitDamagedListener)effect).onUnitDamaged((UnitDamagedEvent)event);
+					}
+				}
 			}
 			event.invertSides();
 			for(Unit unit:game.getSide(owner.otherPlayer()).getHalf().getUnits())
@@ -690,6 +740,13 @@ public class BoardHalf
 				if(unit instanceof UnitDamagedListener)
 				{
 					((UnitDamagedListener)unit).onUnitDamaged((UnitDamagedEvent)event);
+				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitDamagedListener)
+					{
+						((UnitDamagedListener)effect).onUnitDamaged((UnitDamagedEvent)event);
+					}
 				}
 			}
 		}
@@ -701,6 +758,13 @@ public class BoardHalf
 				{
 					((IdolDamagedByUnitListener)unit).onIdolDamagedByUnit((IdolDamagedByUnitEvent)event);
 				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof IdolDamagedByUnitListener)
+					{
+						((IdolDamagedByUnitListener)effect).onIdolDamagedByUnit((IdolDamagedByUnitEvent)event);
+					}
+				}
 			}
 			event.invertSides();
 			for(Unit unit:game.getSide(owner.otherPlayer()).getHalf().getUnits())
@@ -708,6 +772,13 @@ public class BoardHalf
 				if(unit instanceof IdolDamagedByUnitListener)
 				{
 					((IdolDamagedByUnitListener)unit).onIdolDamagedByUnit((IdolDamagedByUnitEvent)event);
+				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof IdolDamagedByUnitListener)
+					{
+						((IdolDamagedByUnitListener)effect).onIdolDamagedByUnit((IdolDamagedByUnitEvent)event);
+					}
 				}
 			}
 		}
@@ -719,6 +790,13 @@ public class BoardHalf
 				{
 					((UnitHasAttackedListener)unit).onUnitHasAttacked((UnitHasAttackedEvent)event);
 				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitHasAttackedListener)
+					{
+						((UnitHasAttackedListener)effect).onUnitHasAttacked((UnitHasAttackedEvent)event);
+					}
+				}
 			}
 			event.invertSides();
 			for(Unit unit:game.getSide(owner.otherPlayer()).getHalf().getUnits())
@@ -726,6 +804,13 @@ public class BoardHalf
 				if(unit instanceof UnitHasAttackedListener)
 				{
 					((UnitHasAttackedListener)unit).onUnitHasAttacked((UnitHasAttackedEvent)event);
+				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitHasAttackedListener)
+					{
+						((UnitHasAttackedListener)effect).onUnitHasAttacked((UnitHasAttackedEvent)event);
+					}
 				}
 			}
 		}
@@ -737,6 +822,13 @@ public class BoardHalf
 				{
 					((TurnEndedListener)unit).onTurnEnded((TurnEndedEvent)event);
 				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof TurnEndedListener)
+					{
+						((TurnEndedListener)effect).onTurnEnded((TurnEndedEvent)event);
+					}
+				}
 			}
 			event.invertSides();
 			for(Unit unit:game.getSide(owner.otherPlayer()).getHalf().getUnits())
@@ -744,6 +836,13 @@ public class BoardHalf
 				if(unit instanceof TurnEndedListener)
 				{
 					((TurnEndedListener)unit).onTurnEnded((TurnEndedEvent)event);
+				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof TurnEndedListener)
+					{
+						((TurnEndedListener)effect).onTurnEnded((TurnEndedEvent)event);
+					}
 				}
 			}
 		}
@@ -755,6 +854,13 @@ public class BoardHalf
 				{
 					((UnitCameIntoPlayListener)unit).onUnitCameIntoPlay((UnitCameIntoPlayEvent)event);
 				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitCameIntoPlayListener)
+					{
+						((UnitCameIntoPlayListener)effect).onUnitCameIntoPlay((UnitCameIntoPlayEvent)event);
+					}
+				}
 			}
 			event.invertSides();
 			for(Unit unit:game.getSide(owner.otherPlayer()).getHalf().getUnits())
@@ -762,6 +868,13 @@ public class BoardHalf
 				if(unit instanceof UnitCameIntoPlayListener)
 				{
 					((UnitCameIntoPlayListener)unit).onUnitCameIntoPlay((UnitCameIntoPlayEvent)event);
+				}
+				for(Effect effect:unit.getEffects())
+				{
+					if(effect instanceof UnitCameIntoPlayListener)
+					{
+						((UnitCameIntoPlayListener)effect).onUnitCameIntoPlay((UnitCameIntoPlayEvent)event);
+					}
 				}
 			}
 		}

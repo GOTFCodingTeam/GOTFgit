@@ -1,6 +1,6 @@
 package com.alvarpq.GOTF.coreGame.effect;
 
-import com.alvarpq.GOTF.coreGame.event.Listener;
+import com.alvarpq.GOTF.coreGame.units.Unit;
 
 /**
  * The superclass of all effects on units.
@@ -37,5 +37,9 @@ public interface Effect
 	 * @return whether the effect makes the unit untargetable
 	 */
 	public boolean untargetable();
-	public Listener addedListener();
+	/**
+	 * Returns the unit owning the effect.
+	 * @return the unit owning the effect
+	 */
+	public Unit getOwner();
 }
