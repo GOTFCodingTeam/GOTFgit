@@ -1,4 +1,7 @@
 package com.alvarpq.GOTF.coreGame.effect;
+
+import com.alvarpq.GOTF.coreGame.event.Listener;
+
 /**
  * Used for permanent effects on units.
  */
@@ -28,7 +31,8 @@ public class Permanent implements Effect
 	 * Whether this permanent effect makes the unit untargetable.
 	 */
 	boolean untargetable;
-	public Permanent(String name, int attack, int baseCountdown, int health, int baseMove, boolean untargetable)
+	Listener addedListener;
+	public Permanent(String name, int attack, int baseCountdown, int health, int baseMove, boolean untargetable, Listener addedListener)
 	{
 		this.name = name;
 		this.attack = attack;
@@ -36,11 +40,13 @@ public class Permanent implements Effect
 		this.health = health;
 		this.baseMove = baseMove;
 		this.untargetable = untargetable;
+		this.addedListener = addedListener;
 	}
 	/**
 	 * Returns the name of the effect.
 	 * @return the name of the effect
 	 */
+	@Override
 	public String getName()
 	{
 		return name;
@@ -49,6 +55,7 @@ public class Permanent implements Effect
 	 * Returns the attack change of the effect.
 	 * @return the attack change of the effect
 	 */
+	@Override
 	public int attackChange()
 	{
 		return attack;
@@ -57,6 +64,7 @@ public class Permanent implements Effect
 	 * Returns the base countdown change of the effect.
 	 * @return the base countdown change of the effect
 	 */
+	@Override
 	public int baseCountdownChange()
 	{
 		return baseCountdown;
@@ -65,6 +73,7 @@ public class Permanent implements Effect
 	 * Returns the health change of the effect.
 	 * @return the health change of the effect
 	 */
+	@Override
 	public int healthChange()
 	{
 		return health;
@@ -73,6 +82,7 @@ public class Permanent implements Effect
 	 * Returns the base move change of the effect.
 	 * @return the base move change of the effect
 	 */
+	@Override
 	public int baseMoveChange()
 	{
 		return baseMove;
@@ -81,8 +91,14 @@ public class Permanent implements Effect
 	 * Returns whether the effect makes the unit untargetable.
 	 * @return whether the effect makes the unit untargetable
 	 */
+	@Override
 	public boolean untargetable()
 	{
 		return untargetable;
+	}
+	@Override
+	public Listener addedListener()
+	{
+		return addedListener;
 	}
 }
