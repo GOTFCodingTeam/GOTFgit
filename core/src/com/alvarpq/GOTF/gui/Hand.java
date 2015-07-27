@@ -63,6 +63,7 @@ public class Hand extends Actor
 			font.draw(batch, temp2, temp.getX()+temp.getWidth()/10*6-temp2.width/2, temp.getY()+temp.getHeight()-temp.getHeight()/6.67f+temp2.height/2);
 			temp2.setText(font, hand.get(i).getElementCost(Element.WATER)+"");
 			font.draw(batch, temp2, temp.getX()+temp.getWidth()/10*7-temp2.width/2, temp.getY()+temp.getHeight()-temp.getHeight()/6.67f+temp2.height/2);
+			font.draw(batch, hand.get(i).getDescription()+"", temp.getX()+temp.getWidth()/10, temp.getY()+temp.getHeight()-temp.getHeight()/5, temp.getWidth()*8/10, 1, true);
 		}
 	}
 	//is a click in these coordinates on a card
