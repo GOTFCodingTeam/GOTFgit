@@ -1,6 +1,9 @@
 package com.alvarpq.GOTF.gui;
+import java.lang.reflect.InvocationTargetException;
 import com.alvarpq.GOTF.coreGame.Element;
 import com.alvarpq.GOTF.coreGame.cards.Card;
+import com.alvarpq.GOTF.coreGame.cards.UnitCard;
+import com.alvarpq.GOTF.coreGame.units.Unit;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -43,6 +46,25 @@ public class GraphicalCard extends Actor
 			font.draw(batch, cardSprite2, cardSprite.getX()+cardSprite.getWidth()/10*6-cardSprite2.width/2, cardSprite.getY()+cardSprite.getHeight()-cardSprite.getHeight()/6.67f+cardSprite2.height/2);
 			cardSprite2.setText(font, card.getElementCost(Element.WATER)+"");
 			font.draw(batch, cardSprite2, cardSprite.getX()+cardSprite.getWidth()/10*7-cardSprite2.width/2, cardSprite.getY()+cardSprite.getHeight()-cardSprite.getHeight()/6.67f+cardSprite2.height/2);
+			font.draw(batch, card.getDescription()+"", cardSprite.getX()+cardSprite.getWidth()/10, cardSprite.getY()+cardSprite.getHeight()-cardSprite.getHeight()/5, cardSprite.getWidth()*8/10, 1, true);
+			if(card instanceof UnitCard)
+			{
+				try
+				{
+					Unit unit = ((UnitCard)card).createUnit(-1, -1);
+					cardSprite2.setText(font, unit.getAttack()+"");
+					font.draw(batch, cardSprite2, cardSprite.getX()+cardSprite.getWidth()/4-cardSprite2.width/2, cardSprite.getY()+cardSprite.getHeight()/10+cardSprite2.height/2);
+					cardSprite2.setText(font, unit.getBaseCountdown()+"");
+					font.draw(batch, cardSprite2, cardSprite.getX()+cardSprite.getWidth()/2-cardSprite2.width/2, cardSprite.getY()+cardSprite.getHeight()/10+cardSprite2.height/2);
+					cardSprite2.setText(font, unit.getMaximumHealth()+"");
+					font.draw(batch, cardSprite2, cardSprite.getX()+cardSprite.getWidth()*3/4-cardSprite2.width/2, cardSprite.getY()+cardSprite.getHeight()/10+cardSprite2.height/2);
+				}
+				catch(InstantiationException e){e.printStackTrace();}
+				catch(IllegalAccessException e){e.printStackTrace();}
+				catch(IllegalArgumentException e){e.printStackTrace();}
+				catch(InvocationTargetException e){e.printStackTrace();}
+				catch(SecurityException e){e.printStackTrace();}
+			}
 		};
 	}
 	//gets the card
