@@ -1,7 +1,10 @@
 package com.alvarpq.GOTF.gui;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.alvarpq.GOTF.coreGame.Element;
 import com.alvarpq.GOTF.coreGame.cards.Card;
+import com.alvarpq.GOTF.coreGame.cards.UnitCard;
+import com.alvarpq.GOTF.coreGame.units.Unit;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -64,6 +67,24 @@ public class Hand extends Actor
 			temp2.setText(font, hand.get(i).getElementCost(Element.WATER)+"");
 			font.draw(batch, temp2, temp.getX()+temp.getWidth()/10*7-temp2.width/2, temp.getY()+temp.getHeight()-temp.getHeight()/6.67f+temp2.height/2);
 			font.draw(batch, hand.get(i).getDescription()+"", temp.getX()+temp.getWidth()/10, temp.getY()+temp.getHeight()-temp.getHeight()/5, temp.getWidth()*8/10, 1, true);
+			if(hand.get(i) instanceof UnitCard)
+			{
+				try
+				{
+					Unit unit = ((UnitCard)hand.get(i)).createUnit(-1, -1);
+					temp2.setText(font, unit.getAttack()+"");
+					font.draw(batch, temp2, temp.getX()+temp.getWidth()/4-temp2.width/2, temp.getY()+temp.getHeight()/10+temp2.height/2);
+					temp2.setText(font, unit.getBaseCountdown()+"");
+					font.draw(batch, temp2, temp.getX()+temp.getWidth()/2-temp2.width/2, temp.getY()+temp.getHeight()/10+temp2.height/2);
+					temp2.setText(font, unit.getMaximumHealth()+"");
+					font.draw(batch, temp2, temp.getX()+temp.getWidth()*3/4-temp2.width/2, temp.getY()+temp.getHeight()/10+temp2.height/2);
+				}
+				catch(InstantiationException e){e.printStackTrace();}
+				catch(IllegalAccessException e){e.printStackTrace();}
+				catch(IllegalArgumentException e){e.printStackTrace();}
+				catch(InvocationTargetException e){e.printStackTrace();}
+				catch(SecurityException e){e.printStackTrace();}
+			}
 		}
 	}
 	//is a click in these coordinates on a card
