@@ -7,26 +7,26 @@ import com.alvarpq.GOTF.coreGame.units.Unit;
 public class UnitHasAttackedEvent extends Event
 {
 	/**
-	 * The unit that attacked.
+	 * The attacker.
 	 */
-	private Unit attackUnit;
+	private Unit attacker;
 	/**
 	 * Instantiates a new UnitHasAttackedEvent.
 	 * @param damagedUnit the unit that has been damaged
 	 * @param mySide the side of the event receiver
 	 * @param opponentsSide the opponents side of the event receiver
 	 */
-	public UnitHasAttackedEvent(Unit attackUnit, Side mySide, Side opponentsSide)
+	public UnitHasAttackedEvent(Unit attacker, Side mySide, Side opponentsSide)
 	{
 		super(mySide, opponentsSide);
-		this.attackUnit = attackUnit;
+		this.attacker = attacker;
 	}
 	/**
-	 * Returns the unit that attacked.
-	 * @return the unit that attacked
+	 * Returns the attacker.
+	 * @return the attacker
 	 */
-	public Unit getAttackUnit()
+	public Unit getAttacker()
 	{
-		return attackUnit;
+		return attacker;
 	}
 }
