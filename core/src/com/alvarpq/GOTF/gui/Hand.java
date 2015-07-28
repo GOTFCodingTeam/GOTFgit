@@ -5,6 +5,7 @@ import com.alvarpq.GOTF.coreGame.Element;
 import com.alvarpq.GOTF.coreGame.cards.Card;
 import com.alvarpq.GOTF.coreGame.cards.UnitCard;
 import com.alvarpq.GOTF.coreGame.units.Unit;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -15,21 +16,21 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 //actor to draw a hand
 public class Hand extends Actor
 {
+	//holds the image assets
+	AssetManager manager;
 	//holds the cards in the hand
 	private List<Card> hand;
 	//the currently highlighted/selected card's index
 	private int highlightedIndex;
-	//holds the card sprite
-	private Texture card;
 	//where to draw
 	private float x, y, cardWidth, cardHeight;
 	//holds the font for drawing stats
 	private BitmapFont font;
 	//constructs a hand
-	public Hand(List<Card> hand, Texture card, float x, float y, float cardWidth, float cardHeight)
+	public Hand(AssetManager manager, List<Card> hand, float x, float y, float cardWidth, float cardHeight)
 	{
+		this.manager = manager;
 		this.hand = hand;
-		this.card = card;
 		highlightedIndex = -1;
 		this.x = x;
 		this.y = y;
@@ -44,7 +45,7 @@ public class Hand extends Actor
 	{
 		for(int i=0;i<hand.size();i++)
 		{
-			Sprite temp = new Sprite(card);
+			Sprite temp = new Sprite(manager.get("card.png", Texture.class));
 			if(i==highlightedIndex)
 			{
 				temp.setBounds(x+(i%5)*cardWidth, y+cardHeight*11/10*(i/5)+cardHeight/10, cardWidth, cardHeight);

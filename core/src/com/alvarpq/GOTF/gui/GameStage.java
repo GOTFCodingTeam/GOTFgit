@@ -80,16 +80,8 @@ public class GameStage extends Stage
 	private BitmapFont font;
 	//loads the image assets
 	AssetManager manager;
-	//the texture for the unselected tile
-	private Texture defaultTile;
 	//the animation for a highlighted tile
 	private Animation highlightedTile;
-	//the texture for a card
-	private Texture card;
-	//the texture for resource indicators
-	private Texture resources;
-	//the texture for idols
-	private Texture idol;
 	//Button spriteDrawables
 	SpriteDrawable buttonUp;
 	SpriteDrawable buttonDown;
@@ -162,8 +154,6 @@ public class GameStage extends Stage
 		manager.finishLoading();
 		//adds the background
 		addActor(new GameBackground());
-		//instantiates the unselected tile
-		defaultTile = manager.get("BoardTile.png", Texture.class);
 		//instantiates the highlighted tile animation
 		highlightedTile = new Animation(0.125f, new TextureRegion(manager.get("GUI/selectedTiles/selectedTile(0).png", Texture.class)),
     	new TextureRegion(manager.get("GUI/selectedTiles/selectedTile(1).png", Texture.class)),
@@ -173,12 +163,6 @@ public class GameStage extends Stage
     	new TextureRegion(manager.get("GUI/selectedTiles/selectedTile(5).png", Texture.class)),
     	new TextureRegion(manager.get("GUI/selectedTiles/selectedTile(6).png", Texture.class)));
 		highlightedTile.setPlayMode(PlayMode.LOOP_REVERSED);
-    	//instantiates the card texture
-    	card = new Texture("card.png");
-    	//instantiates the resource indixator texture
-    	resources = new Texture("resource.png");
-    	//instantiates the idol texture
-    	idol = new Texture("idol.png");
     	//instantiates button SpriteDrawables
     	buttonUp = new SpriteDrawable(new Sprite(manager.get("buttonUp.png", Texture.class)));
     	buttonDown = new SpriteDrawable(new Sprite(manager.get("buttonDown.png", Texture.class)));
@@ -187,15 +171,15 @@ public class GameStage extends Stage
     	//sets up the board
 		setupBoard();
 		//instantiates hands
-		hand1 = new Hand(game.getSide(Player.PLAYER1).getDeck().getHand(), card, 0, 0, CARD_LENGTH, CARD_HEIGHT);
-		hand2 = new Hand(game.getSide(Player.PLAYER2).getDeck().getHand(), card, 0, 0, CARD_LENGTH, CARD_HEIGHT);
+		hand1 = new Hand(manager, game.getSide(Player.PLAYER1).getDeck().getHand(), 0, 0, CARD_LENGTH, CARD_HEIGHT);
+		hand2 = new Hand(manager, game.getSide(Player.PLAYER2).getDeck().getHand(), 0, 0, CARD_LENGTH, CARD_HEIGHT);
 		updateHands();
 		//instantiates resource indicators
-		Sprite temp = new Sprite(resources);
+		Sprite temp = new Sprite(manager.get("resource.png", Texture.class));
 		temp.setBounds(getWidth()-100, 0, 100, 275);
 		resources1 = new Resources(game.getSide(Player.PLAYER1), temp);
 		addActor(resources1);
-		temp = new Sprite(resources);
+		temp = new Sprite(manager.get("resource.png", Texture.class));
 		temp.setBounds(getWidth()-100, getHeight()-275, 100, 275);
 		resources2 = new Resources(game.getSide(Player.PLAYER2), temp);
 		addActor(resources2);
@@ -732,7 +716,7 @@ public class GameStage extends Stage
 		currentPlayer.setBounds(150, getHeight()-50, 100, 50);
 		addActor(currentPlayer);
 		//creates a sprite from the card texture
-		Sprite temp = new Sprite(card);
+		Sprite temp = new Sprite(manager.get("card.png", Texture.class));
 		//gives the sprite correct bounds
 		temp.setBounds(getWidth()-LENGTH*4-100-CARD_LENGTH, getHeight()-CARD_HEIGHT, CARD_LENGTH, CARD_HEIGHT);
 		//insntatiates the actor
@@ -752,7 +736,7 @@ public class GameStage extends Stage
 		for(int i=0;i<5;i++)
     	{
 			//creates a sprite from the idol texture
-			Sprite temp = new Sprite(idol);
+			Sprite temp = new Sprite(manager.get("idol.png", Texture.class));
 			//gives the sprite correct bounds
 			temp.setBounds(getWidth()-LENGTH*7/2-140+i*LENGTH*3/4, 0, IDOL_LENGTH, IDOL_HEIGHT);
 			//creates the idols and adds it to idol array
@@ -760,7 +744,7 @@ public class GameStage extends Stage
 			//adds the tile to the stage
 			addActor(idols1[i]);
 			//same for player 2
-			temp = new Sprite(idol);
+			temp = new Sprite(manager.get("idol.png", Texture.class));
 			//gives the sprite correct bounds
 			temp.setBounds(getWidth()-LENGTH*7/2-140+i*LENGTH*3/4, getHeight()-IDOL_HEIGHT, IDOL_LENGTH, IDOL_HEIGHT);
 			//creates the idols and adds it to idol array
@@ -770,7 +754,7 @@ public class GameStage extends Stage
     		for(int j=0;j<3;j++)
     		{
     			//creates a sprite from the unselected tile texture
-    			temp = new Sprite(defaultTile);
+    			temp = new Sprite(manager.get("BoardTile.png", Texture.class));
     			//gives the sprite correct bounds
     			temp.setBounds(getWidth()-LENGTH*4-100+i*LENGTH*3/4, HEIGHT*3/4+(2-j)*HEIGHT+i%2*HEIGHT/2, LENGTH, HEIGHT);
     			//rotates the sprite to fit a top-down game view
@@ -780,7 +764,7 @@ public class GameStage extends Stage
     			//adds the tile to the stage
     			addActor(half1[i][j]);
     			//same for player2
-    			temp = new Sprite(defaultTile);
+    			temp = new Sprite(manager.get("BoardTile.png", Texture.class));
     			temp.setBounds(getWidth()-LENGTH*4-100+i*LENGTH*3/4, getHeight()-HEIGHT*7/4-((2-j)*HEIGHT+i%2*HEIGHT/2), LENGTH, HEIGHT);
     			temp.rotate90(true);
     			half2[i][j] = new Tile(temp, highlightedTile);
