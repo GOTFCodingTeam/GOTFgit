@@ -11,7 +11,7 @@ public class Coward extends Permanent implements UnitHasAttackedListener
 	@Override
 	public void onUnitHasAttacked(UnitHasAttackedEvent event)
 	{
-		if(event.getAttackUnit()==getOwner())
+		if(event.getAttacker()==getOwner())
 		{
 			event.getMySide().getHalf().removeUnit(getOwner());
 			if(getOwner().getCard()!=null)
