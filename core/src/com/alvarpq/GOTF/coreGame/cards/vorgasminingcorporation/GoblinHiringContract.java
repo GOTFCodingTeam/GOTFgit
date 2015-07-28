@@ -15,15 +15,11 @@ import com.alvarpq.GOTF.requirement.Requirement;
 public class GoblinHiringContract extends SpellCard implements TurnEndedListener
 {
 	public List<Card> hiredGoblins;
-	public List<Boolean> resourceCostDecreased;
-	public List<Boolean> elementCostDecreased;
 	public GoblinHiringContract(Player owner)
 	{
-		super(110110, "Goblin Hiring Contract", 1, new Element[]{Element.EARTH}, "Goblins you play this turn cost 1 resource and 1 Earth less.", owner);
+		super(110110, "Goblin Hiring Contract", 1, new Element[]{Element.EARTH}, "Goblins with Earth in their cost you play this turn cost 1 resource and 1 Earth less.", owner);
 		setRequirements(new Requirement[]{});
 		hiredGoblins = new LinkedList<Card>();
-		resourceCostDecreased = new LinkedList<Boolean>();
-		elementCostDecreased = new LinkedList<Boolean>();
 	}
 	@Override
 	public boolean play(Side mySide, Side opponentsSide)
@@ -34,20 +30,10 @@ public class GoblinHiringContract extends SpellCard implements TurnEndedListener
 			{
 				try
 				{
-					if(card instanceof UnitCard&&Arrays.asList(((UnitCard)card).createUnit(-1, -1).getSubtypes()).contains("Goblin"))
+					if(card.getElementCost().contains(Element.EARTH)&&card instanceof UnitCard&&Arrays.asList(((UnitCard)card).createUnit(-1, -1).getSubtypes()).contains("Goblin"))
 					{
-						boolean rcd = card.getResourceCost()>0;
-						if(rcd)
-						{
-							card.setResourceCost(card.getResourceCost()-1);
-						}
-						boolean ecd = card.getElementCost().remove(Element.EARTH);
-						if(rcd||ecd)
-						{
-							hiredGoblins.add(card);
-							resourceCostDecreased.add(rcd);
-							elementCostDecreased.add(ecd);
-						}
+						card.setResourceCost(card.getResourceCost()-1);
+						card.getElementCost().remove(Element.EARTH);
 					}
 				}
 				catch(InstantiationException e){e.printStackTrace();}
@@ -67,14 +53,8 @@ public class GoblinHiringContract extends SpellCard implements TurnEndedListener
 	{
 		for(int i=0;i<hiredGoblins.size();i++)
 		{
-			if(resourceCostDecreased.get(i))
-			{
-				hiredGoblins.get(i).setResourceCost(hiredGoblins.get(i).getResourceCost()+1);
-			}
-			if(elementCostDecreased.get(i))
-			{
-				hiredGoblins.get(i).getElementCost().add(Element.EARTH);
-			}
+			hiredGoblins.get(i).setResourceCost(hiredGoblins.get(i).getResourceCost()+1);
+			hiredGoblins.get(i).getElementCost().add(Element.EARTH);
 		}
 		hiredGoblins.clear();
 	}
