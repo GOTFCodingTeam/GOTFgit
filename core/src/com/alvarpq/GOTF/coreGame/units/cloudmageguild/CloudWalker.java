@@ -4,6 +4,6 @@ public class CloudWalker extends Unit
 {
 	public CloudWalker(int row, int column)
 	{
-		super("CloudWalker", null, 3, 2, 3, 1, true, new String[]{"Mage"}, row, column);
+		super("Cloud Walker", null, 3, 2, 3, 1, true, new String[]{"Mage"}, row, column);
 	}
 }

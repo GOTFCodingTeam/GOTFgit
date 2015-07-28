@@ -8,7 +8,7 @@ public class CloudWalkerCard extends UnitCard
 {
 	public CloudWalkerCard(Player owner)
 	{
-		super(110201, "Cloud Walker", 1, new Element[]{Element.AIR}, "", owner, new UnitFactory(CloudWalker.class));
+		super(110201, "Cloud Walker", 3, new Element[]{Element.AIR, Element.AIR}, "", owner, new UnitFactory(CloudWalker.class));
 	}
 }
 
