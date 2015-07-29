@@ -145,12 +145,16 @@ public class GameStage extends Stage
 		manager.load("GUI/selectedTiles/selectedTile(5).png", Texture.class);
 		manager.load("GUI/selectedTiles/selectedTile(6).png", Texture.class);
 		manager.load("card.png", Texture.class);
-		manager.load("resource.png", Texture.class);
 		manager.load("idol.png", Texture.class);
 		manager.load("buttonUp.png", Texture.class);
 		manager.load("buttonDown.png", Texture.class);
 		manager.load("buttonUpSmall.png", Texture.class);
 		manager.load("buttonDownSmall.png", Texture.class);
+		manager.load("resource.png", Texture.class);
+		manager.load("air.png", Texture.class);
+		manager.load("earth.png", Texture.class);
+		manager.load("fire.png", Texture.class);
+		manager.load("water.png", Texture.class);
 		manager.finishLoading();
 		//adds the background
 		addActor(new GameBackground());
@@ -175,13 +179,9 @@ public class GameStage extends Stage
 		hand2 = new Hand(manager, game.getSide(Player.PLAYER2).getDeck().getHand(), 0, 0, CARD_LENGTH, CARD_HEIGHT);
 		updateHands();
 		//instantiates resource indicators
-		Sprite temp = new Sprite(manager.get("resource.png", Texture.class));
-		temp.setBounds(getWidth()-100, 0, 100, 275);
-		resources1 = new Resources(game.getSide(Player.PLAYER1), temp);
+		resources1 = new Resources(manager, game.getSide(Player.PLAYER1), getWidth()-100, 0, 100, 250);
 		addActor(resources1);
-		temp = new Sprite(manager.get("resource.png", Texture.class));
-		temp.setBounds(getWidth()-100, getHeight()-275, 100, 275);
-		resources2 = new Resources(game.getSide(Player.PLAYER2), temp);
+		resources2 = new Resources(manager, game.getSide(Player.PLAYER2), getWidth()-100, getHeight()-250, 100, 250);
 		addActor(resources2);
 		//sets up the gui
 		setupGui();
