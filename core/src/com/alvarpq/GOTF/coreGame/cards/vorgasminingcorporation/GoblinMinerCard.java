@@ -8,6 +8,6 @@ public class GoblinMinerCard extends UnitCard
 {
 	public GoblinMinerCard(Player owner)
 	{
-		super(110116, "Goblin Miner", 1, new Element[]{Element.EARTH}, "When Goblin Miner deals damage to an idol, it increases your resources and Earth by 1.", owner, new UnitFactory(GoblinMiner.class));
+		super(110116, "Goblin Miner", 1, new Element[]{Element.EARTH}, "When Goblin Miner deals damage to an idol, increase your resources and Earth by 1.", owner, new UnitFactory(GoblinMiner.class));
 	}
 }
