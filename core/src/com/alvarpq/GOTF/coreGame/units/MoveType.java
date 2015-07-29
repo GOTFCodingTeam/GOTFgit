@@ -97,6 +97,44 @@ public interface MoveType
 		}
 	}
 	/**
+	 * A move type which makes a unit able to move to any tile, increasing its countdown with 1 if it moves to a non-adjacent tile.
+	 */
+	class Flying implements MoveType
+	{
+		@Override
+		public boolean move(Unit unit, int row, int column, Side mySide, Side opponentsSide, Unit[][] mySideUnits)
+		{
+			if(unit.getMove()>0&&mySide.getHalf().getUnitAt(row, column)==null)
+			{
+				if(!BoardHalf.isAdjacent(unit.getRow(), unit.getColumn(), row, column))
+				{
+					unit.changeCountdown(1);
+				}
+				unit.changeMove(-1);
+				mySideUnits[row][column] = unit;
+				mySideUnits[unit.getRow()][unit.getColumn()] = null;
+				unit.setRow(row);
+				unit.setColumn(column);
+				return true;
+			}
+			return false;
+		}
+		@Override
+		public boolean canMove(Unit unit, int row, int column, Side mySide, Side opponentsSide, Unit[][] mySideUnits)
+		{
+			if(unit.getMove()>0&&mySide.getHalf().getUnitAt(row, column)==null)
+			{
+				return true;
+			}
+			return false;
+		}
+		@Override
+		public String toString()
+		{
+			return "Normal";
+		}
+	}
+	/**
 	 * A move type which makes a unit unable to move.
 	 */
 	class Immovable implements MoveType
