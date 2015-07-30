@@ -24,6 +24,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -85,8 +86,6 @@ public class GameStage extends Stage
 	//Button spriteDrawables
 	SpriteDrawable buttonUp;
 	SpriteDrawable buttonDown;
-	SpriteDrawable buttonUpSmall;
-	SpriteDrawable buttonDownSmall;
 	//all the tiles (graphical class for displaying tiles and corresponding units)
 	private Tile[][] half1;
 	private Tile[][] half2;
@@ -104,10 +103,10 @@ public class GameStage extends Stage
 	//the sacrifice for cards button
 	private TextButton sacCards;
 	//the sacrifice for resources buttons
-	private TextButton sacAir;
-	private TextButton sacEarth;
-	private TextButton sacFire;
-	private TextButton sacWater;
+	private ImageButton sacAir;
+	private ImageButton sacEarth;
+	private ImageButton sacFire;
+	private ImageButton sacWater;
 	//the play card button, only for cards with no input
 	private TextButton playCard;
 	//the label for diplaying whose turn it is
@@ -148,13 +147,15 @@ public class GameStage extends Stage
 		manager.load("idol.png", Texture.class);
 		manager.load("buttonUp.png", Texture.class);
 		manager.load("buttonDown.png", Texture.class);
-		manager.load("buttonUpSmall.png", Texture.class);
-		manager.load("buttonDownSmall.png", Texture.class);
 		manager.load("resource.png", Texture.class);
 		manager.load("air.png", Texture.class);
 		manager.load("earth.png", Texture.class);
 		manager.load("fire.png", Texture.class);
 		manager.load("water.png", Texture.class);
+		manager.load("airdown.png", Texture.class);
+		manager.load("earthdown.png", Texture.class);
+		manager.load("firedown.png", Texture.class);
+		manager.load("waterdown.png", Texture.class);
 		manager.finishLoading();
 		//adds the background
 		addActor(new GameBackground());
@@ -170,8 +171,6 @@ public class GameStage extends Stage
     	//instantiates button SpriteDrawables
     	buttonUp = new SpriteDrawable(new Sprite(manager.get("buttonUp.png", Texture.class)));
     	buttonDown = new SpriteDrawable(new Sprite(manager.get("buttonDown.png", Texture.class)));
-    	buttonUpSmall = new SpriteDrawable(new Sprite(manager.get("buttonUpSmall.png", Texture.class)));
-    	buttonDownSmall = new SpriteDrawable(new Sprite(manager.get("buttonDownSmall.png", Texture.class)));
     	//sets up the board
 		setupBoard();
 		//instantiates hands
@@ -631,7 +630,7 @@ public class GameStage extends Stage
 	        }
 	    });
 		addActor(sacCards);
-		sacAir = new TextButton("A", new TextButton.TextButtonStyle(buttonUpSmall, buttonDownSmall, buttonDownSmall, font));
+		sacAir = new ImageButton(new SpriteDrawable(new Sprite(manager.get("air.png", Texture.class))), new SpriteDrawable(new Sprite(manager.get("airdown.png", Texture.class))));
 		sacAir.setBounds(0, getHeight()-150, 50, 50);
 		sacAir.setDisabled(true);
 		sacAir.addListener(new ClickListener(){
@@ -647,7 +646,7 @@ public class GameStage extends Stage
 	        }
 	    });
 		addActor(sacAir);
-		sacEarth = new TextButton("E", new TextButton.TextButtonStyle(buttonUpSmall, buttonDownSmall, buttonDownSmall, font));
+		sacEarth =new ImageButton(new SpriteDrawable(new Sprite(manager.get("earth.png", Texture.class))), new SpriteDrawable(new Sprite(manager.get("earthdown.png", Texture.class))));
 		sacEarth.setBounds(50, getHeight()-150, 50, 50);
 		sacEarth.setDisabled(true);
 		sacEarth.addListener(new ClickListener(){
@@ -663,7 +662,7 @@ public class GameStage extends Stage
 	        }
 	    });
 		addActor(sacEarth);
-		sacFire = new TextButton("F", new TextButton.TextButtonStyle(buttonUpSmall, buttonDownSmall, buttonDownSmall, font));
+		sacFire = new ImageButton(new SpriteDrawable(new Sprite(manager.get("fire.png", Texture.class))), new SpriteDrawable(new Sprite(manager.get("firedown.png", Texture.class))));
 		sacFire.setBounds(0, getHeight()-200, 50, 50);
 		sacFire.setDisabled(true);
 		sacFire.addListener(new ClickListener(){
@@ -679,7 +678,7 @@ public class GameStage extends Stage
 	        }
 	    });
 		addActor(sacFire);
-		sacWater = new TextButton("W", new TextButton.TextButtonStyle(buttonUpSmall, buttonDownSmall, buttonDownSmall, font));
+		sacWater = new ImageButton(new SpriteDrawable(new Sprite(manager.get("water.png", Texture.class))), new SpriteDrawable(new Sprite(manager.get("waterdown.png", Texture.class))));
 		sacWater.setBounds(50, getHeight()-200, 50, 50);
 		sacWater.setDisabled(true);
 		sacWater.addListener(new ClickListener(){
@@ -695,7 +694,7 @@ public class GameStage extends Stage
 	        }
 	    });
 		addActor(sacWater);
-		playCard = new TextButton("Play", new TextButton.TextButtonStyle(buttonUpSmall, buttonDownSmall, buttonDownSmall, font));
+		playCard = new TextButton("Play", new TextButton.TextButtonStyle(buttonUp, buttonDown, buttonDown, font));
 		playCard.setBounds(0, getHeight()-250, 100, 50);
 		playCard.setDisabled(true);
 		playCard.addListener(new ClickListener(){
