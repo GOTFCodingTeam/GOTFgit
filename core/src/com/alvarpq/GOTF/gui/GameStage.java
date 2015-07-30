@@ -720,7 +720,7 @@ public class GameStage extends Stage
 		//gives the sprite correct bounds
 		temp.setBounds(getWidth()-LENGTH*4-100-CARD_LENGTH, getHeight()-CARD_HEIGHT, CARD_LENGTH, CARD_HEIGHT);
 		//insntatiates the actor
-		highlightedUnit = new GraphicalCard(null, temp);
+		highlightedUnit = new GraphicalCard(manager, null, temp);
 		//adds the actor to the stage
 		addActor(highlightedUnit);
 	}

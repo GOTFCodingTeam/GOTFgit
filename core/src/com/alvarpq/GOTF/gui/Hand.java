@@ -55,30 +55,56 @@ public class Hand extends Actor
 				temp.setBounds(x+(i%5)*cardWidth, y+cardHeight*11/10*(i/5), cardWidth, cardHeight);
 			}
 			temp.draw(batch);
-			GlyphLayout temp2 = new GlyphLayout(font, hand.get(i).getName()+"");
-			font.draw(batch, temp2, temp.getX()+temp.getWidth()/2-temp2.width/2, temp.getY()+temp.getHeight()-temp.getHeight()/15+temp2.height/2);
-			temp2.setText(font, hand.get(i).getResourceCost()+"");
-			font.draw(batch, temp2, temp.getX()+temp.getWidth()/2-temp2.width/2, temp.getY()+temp.getHeight()-temp.getHeight()/6.67f+temp2.height/2);
-			temp2.setText(font, hand.get(i).getElementCost(Element.AIR)+"");
-			font.draw(batch, temp2, temp.getX()+temp.getWidth()/10*3-temp2.width/2, temp.getY()+temp.getHeight()-temp.getHeight()/6.67f+temp2.height/2);
-			temp2.setText(font, hand.get(i).getElementCost(Element.EARTH)+"");
-			font.draw(batch, temp2, temp.getX()+temp.getWidth()/10*4-temp2.width/2, temp.getY()+temp.getHeight()-temp.getHeight()/6.67f+temp2.height/2);
-			temp2.setText(font, hand.get(i).getElementCost(Element.FIRE)+"");
-			font.draw(batch, temp2, temp.getX()+temp.getWidth()/10*6-temp2.width/2, temp.getY()+temp.getHeight()-temp.getHeight()/6.67f+temp2.height/2);
-			temp2.setText(font, hand.get(i).getElementCost(Element.WATER)+"");
-			font.draw(batch, temp2, temp.getX()+temp.getWidth()/10*7-temp2.width/2, temp.getY()+temp.getHeight()-temp.getHeight()/6.67f+temp2.height/2);
+			GlyphLayout temp3 = new GlyphLayout(font, hand.get(i).getName()+"");
+			font.draw(batch, temp3, temp.getX()+temp.getWidth()/2-temp3.width/2, temp.getY()+temp.getHeight()-temp.getHeight()/15+temp3.height/2);
+			float currentX = temp.getX()+temp.getWidth()/8;
+			for(int j=0;j<hand.get(i).getResourceCost();j++)
+			{
+				Sprite temp2 = new Sprite(manager.get("resource.png", Texture.class));
+				temp2.setBounds(currentX, temp.getY()+temp.getHeight()*17/20, temp.getWidth()/13.33f, temp.getHeight()/20);
+				temp2.draw(batch);
+				currentX+=temp.getWidth()/13.33f;
+			}
+			for(int j=0;j<hand.get(i).getElementCost(Element.AIR);j++)
+			{
+				Sprite temp2 = new Sprite(manager.get("air.png", Texture.class));
+				temp2.setBounds(currentX, temp.getY()+temp.getHeight()*17/20, temp.getWidth()/13.33f, temp.getHeight()/20);
+				temp2.draw(batch);
+				currentX+=temp.getWidth()/13.33f;
+			}
+			for(int j=0;j<hand.get(i).getElementCost(Element.EARTH);j++)
+			{
+				Sprite temp2 = new Sprite(manager.get("earth.png", Texture.class));
+				temp2.setBounds(currentX, temp.getY()+temp.getHeight()*17/20, temp.getWidth()/13.33f, temp.getHeight()/20);
+				temp2.draw(batch);
+				currentX+=temp.getWidth()/13.33f;
+			}
+			for(int j=0;j<hand.get(i).getElementCost(Element.FIRE);j++)
+			{
+				Sprite temp2 = new Sprite(manager.get("fire.png", Texture.class));
+				temp2.setBounds(currentX, temp.getY()+temp.getHeight()*17/20, temp.getWidth()/13.33f, temp.getHeight()/20);
+				temp2.draw(batch);
+				currentX+=temp.getWidth()/13.33f;
+			}
+			for(int j=0;j<hand.get(i).getElementCost(Element.WATER);j++)
+			{
+				Sprite temp2 = new Sprite(manager.get("water.png", Texture.class));
+				temp2.setBounds(currentX, temp.getY()+temp.getHeight()*17/20, temp.getWidth()/13.33f, temp.getHeight()/20);
+				temp2.draw(batch);
+				currentX+=temp.getWidth()/13.33f;
+			}
 			font.draw(batch, hand.get(i).getDescription()+"", temp.getX()+temp.getWidth()/10, temp.getY()+temp.getHeight()-temp.getHeight()/5, temp.getWidth()*8/10, 1, true);
 			if(hand.get(i) instanceof UnitCard)
 			{
 				try
 				{
 					Unit unit = ((UnitCard)hand.get(i)).createUnit(-1, -1);
-					temp2.setText(font, unit.getAttack()+"");
-					font.draw(batch, temp2, temp.getX()+temp.getWidth()/4-temp2.width/2, temp.getY()+temp.getHeight()/10+temp2.height/2);
-					temp2.setText(font, unit.getBaseCountdown()+"");
-					font.draw(batch, temp2, temp.getX()+temp.getWidth()/2-temp2.width/2, temp.getY()+temp.getHeight()/10+temp2.height/2);
-					temp2.setText(font, unit.getMaximumHealth()+"");
-					font.draw(batch, temp2, temp.getX()+temp.getWidth()*3/4-temp2.width/2, temp.getY()+temp.getHeight()/10+temp2.height/2);
+					temp3.setText(font, unit.getAttack()+"");
+					font.draw(batch, temp3, temp.getX()+temp.getWidth()/4-temp3.width/2, temp.getY()+temp.getHeight()/10+temp3.height/2);
+					temp3.setText(font, unit.getBaseCountdown()+"");
+					font.draw(batch, temp3, temp.getX()+temp.getWidth()/2-temp3.width/2, temp.getY()+temp.getHeight()/10+temp3.height/2);
+					temp3.setText(font, unit.getMaximumHealth()+"");
+					font.draw(batch, temp3, temp.getX()+temp.getWidth()*3/4-temp3.width/2, temp.getY()+temp.getHeight()/10+temp3.height/2);
 				}
 				catch(InstantiationException e){e.printStackTrace();}
 				catch(IllegalAccessException e){e.printStackTrace();}
