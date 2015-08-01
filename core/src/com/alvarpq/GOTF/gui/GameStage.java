@@ -68,17 +68,15 @@ public class GameStage extends Stage
 	//a tile's height
 	private static final float HEIGHT = 104;
 	//a card's length
-	private static final float CARD_LENGTH = 200;
+	private static final float CARD_LENGTH = 175;
 	//a card's height
-	private static final float CARD_HEIGHT = 300;
+	private static final float CARD_HEIGHT = 223;
 	//a idol's length
 	private static final float IDOL_LENGTH = 80;
 	//a idol's height
 	private static final float IDOL_HEIGHT = 80;
 	//the game this GameStage displays
 	private Game game;
-	//holds the font for drawing text
-	private BitmapFont font;
 	//loads the image assets
 	AssetManager manager;
 	//the animation for a highlighted tile
@@ -130,9 +128,6 @@ public class GameStage extends Stage
 		110113, 110113, 110113, 110113, 110115, 110115, 110115, 110115});
 		game = new Game(new User(null, null, new Deck(ids, Player.PLAYER1, true)), new User(null, null, new Deck(ids, Player.PLAYER2, true)));
 		game.start(5);
-		//instantiates font
-		font = new BitmapFont();
-		font.setColor(Color.BLACK);
 		//instantiates assetmanager
 		manager = new AssetManager();
 		manager.load("BoardTile.png", Texture.class);
@@ -156,6 +151,18 @@ public class GameStage extends Stage
 		manager.load("earthdown.png", Texture.class);
 		manager.load("firedown.png", Texture.class);
 		manager.load("waterdown.png", Texture.class);
+		manager.load("aircard.png", Texture.class);
+		manager.load("earthcard.png", Texture.class);
+		manager.load("firecard.png", Texture.class);
+		manager.load("watercard.png", Texture.class);
+		manager.load("airunit.png", Texture.class);
+		manager.load("earthunit.png", Texture.class);
+		manager.load("fireunit.png", Texture.class);
+		manager.load("waterunit.png", Texture.class);
+		manager.load("neutralcard.png", Texture.class);
+		manager.load("neutralunit.png", Texture.class);
+		manager.load("font.fnt", BitmapFont.class);
+		manager.load("fontsmall.fnt", BitmapFont.class);
 		manager.finishLoading();
 		//adds the background
 		addActor(new GameBackground());
@@ -596,7 +603,7 @@ public class GameStage extends Stage
 	//sets up the buttons
 	public void setupGui()
 	{
-		endTurn = new TextButton("End Turn", new TextButton.TextButtonStyle(buttonUp, buttonDown, buttonDown, font));
+		endTurn = new TextButton("End Turn", new TextButton.TextButtonStyle(buttonUp, buttonDown, buttonDown, manager.get("font.fnt", BitmapFont.class)));
 		endTurn.setBounds(0, getHeight()-50, 100, 50);
 		endTurn.setDisabled(true);
 		endTurn.addListener(new ClickListener(){
@@ -614,7 +621,7 @@ public class GameStage extends Stage
 	        }
 	    });
 		addActor(endTurn);
-		sacCards = new TextButton("Cards", new TextButton.TextButtonStyle(buttonUp, buttonDown, buttonDown, font));
+		sacCards = new TextButton("Cards", new TextButton.TextButtonStyle(buttonUp, buttonDown, buttonDown, manager.get("font.fnt", BitmapFont.class)));
 		sacCards.setBounds(0, getHeight()-100, 100, 50);
 		sacCards.setDisabled(true);
 		sacCards.addListener(new ClickListener(){
@@ -694,7 +701,7 @@ public class GameStage extends Stage
 	        }
 	    });
 		addActor(sacWater);
-		playCard = new TextButton("Play", new TextButton.TextButtonStyle(buttonUp, buttonDown, buttonDown, font));
+		playCard = new TextButton("Play", new TextButton.TextButtonStyle(buttonUp, buttonDown, buttonDown, manager.get("font.fnt", BitmapFont.class)));
 		playCard.setBounds(0, getHeight()-250, 100, 50);
 		playCard.setDisabled(true);
 		playCard.addListener(new ClickListener(){
@@ -711,15 +718,11 @@ public class GameStage extends Stage
 	        }
 	    });
 		addActor(playCard);
-		currentPlayer = new Label("Current player's position: "+(game.getCurrentPlayer()==Player.PLAYER1?"BOTTOM":"TOP"), new Label.LabelStyle(font, Color.BLACK));
+		currentPlayer = new Label("Current player's position: "+(game.getCurrentPlayer()==Player.PLAYER1?"BOTTOM":"TOP"), new Label.LabelStyle(manager.get("font.fnt", BitmapFont.class), Color.BLACK));
 		currentPlayer.setBounds(150, getHeight()-50, 100, 50);
 		addActor(currentPlayer);
-		//creates a sprite from the card texture
-		Sprite temp = new Sprite(manager.get("card.png", Texture.class));
-		//gives the sprite correct bounds
-		temp.setBounds(getWidth()-LENGTH*4-100-CARD_LENGTH, getHeight()-CARD_HEIGHT, CARD_LENGTH, CARD_HEIGHT);
 		//insntatiates the actor
-		highlightedUnit = new GraphicalCard(manager, null, temp);
+		highlightedUnit = new GraphicalCard(manager, null, getWidth()-LENGTH*4-100-CARD_LENGTH, getHeight()-CARD_HEIGHT, CARD_LENGTH, CARD_HEIGHT);
 		//adds the actor to the stage
 		addActor(highlightedUnit);
 	}

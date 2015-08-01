@@ -59,7 +59,10 @@ public class Tile extends Actor
 		//draws the unit if there is one
 		if(unit!=null)
 		{
-			unitSprite.draw(batch);
+			if(unitSprite!=null)
+			{
+				unitSprite.draw(batch);
+			}
 			GlyphLayout temp = new GlyphLayout(font, unit.getAttack()+"");
 			font.draw(batch, temp, tile.getX()+15-temp.width/2, tile.getY()+tile.getHeight()/2+temp.height/2);
 			temp.setText(font, unit.getCountdown()+"");
@@ -113,15 +116,11 @@ public class Tile extends Actor
 		}
 		else
 		{
-			if(unit.getImage()==null)
-			{
-				unitSprite = new Sprite(new Texture("noTexture.png"));
-			}
-			else
+			if(unit.getImage()!=null)
 			{
 				unitSprite = new Sprite(new Texture(unit.getImage()));
+				unitSprite.setBounds(tile.getX()+tile.getWidth()/4, tile.getY(), tile.getWidth()/2, tile.getHeight());
 			}
-			unitSprite.setBounds(tile.getX()+tile.getWidth()/4, tile.getY(), tile.getWidth()/2, tile.getHeight());
 		}
 	}
 }

@@ -24,8 +24,6 @@ public class Hand extends Actor
 	private int highlightedIndex;
 	//where to draw
 	private float x, y, cardWidth, cardHeight;
-	//holds the font for drawing stats
-	private BitmapFont font;
 	//constructs a hand
 	public Hand(AssetManager manager, List<Card> hand, float x, float y, float cardWidth, float cardHeight)
 	{
@@ -35,82 +33,181 @@ public class Hand extends Actor
 		this.x = x;
 		this.y = y;
 		this.cardWidth = cardWidth;
-		this.cardHeight = cardHeight;
-		font = new BitmapFont();
-		font.setColor(Color.BLACK);		
+		this.cardHeight = cardHeight;	
 	}
 	//draws the hand
 	@Override
 	public void draw(Batch batch, float parentAlpha)
 	{
+		//the fonts
+		BitmapFont font = manager.get("font.fnt", BitmapFont.class);
+		font.setColor(Color.BLACK);
+		BitmapFont fontSmall = manager.get("fontsmall.fnt", BitmapFont.class);
+		fontSmall.setColor(Color.BLACK);
 		for(int i=0;i<hand.size();i++)
 		{
-			Sprite temp = new Sprite(manager.get("card.png", Texture.class));
-			if(i==highlightedIndex)
+			//the variables are: temp = the sprite, temp2 = the resource sprite, temp3 = the glyphlayout for drawing centered text, don't blame me for names, blame libgdx
+			if(!(hand.get(i) instanceof UnitCard))
 			{
-				temp.setBounds(x+(i%5)*cardWidth, y+cardHeight*11/10*(i/5)+cardHeight/10, cardWidth, cardHeight);
+				Sprite temp;
+				//determining which texture to use and draws it
+				if(hand.get(i).getElementCost(Element.AIR)>0&&hand.get(i).getElementCost(Element.EARTH)==0&&
+				hand.get(i).getElementCost(Element.FIRE)==0&&hand.get(i).getElementCost(Element.WATER)==0)
+				{
+					temp = new Sprite(manager.get("aircard.png", Texture.class));
+				}
+				else if(hand.get(i).getElementCost(Element.AIR)==0&&hand.get(i).getElementCost(Element.EARTH)>0&&
+				hand.get(i).getElementCost(Element.FIRE)==0&&hand.get(i).getElementCost(Element.WATER)==0)
+				{
+					temp = new Sprite(manager.get("earthcard.png", Texture.class));
+				}
+				else if(hand.get(i).getElementCost(Element.AIR)==0&&hand.get(i).getElementCost(Element.EARTH)==0&&
+				hand.get(i).getElementCost(Element.FIRE)>0&&hand.get(i).getElementCost(Element.WATER)==0)
+				{
+					temp = new Sprite(manager.get("firecard.png", Texture.class));
+				}
+				else if(hand.get(i).getElementCost(Element.AIR)==0&&hand.get(i).getElementCost(Element.EARTH)==0&&
+				hand.get(i).getElementCost(Element.FIRE)==0&&hand.get(i).getElementCost(Element.WATER)>0)
+				{
+					temp = new Sprite(manager.get("watercard.png", Texture.class));
+				}
+				else
+				{
+					temp = new Sprite(manager.get("neutralcard.png", Texture.class));
+				}
+				if(i==highlightedIndex)
+				{
+					temp.setBounds(x+(i%5)*cardWidth, y+cardHeight*11/10*(i/5)+cardHeight/10, cardWidth, cardHeight);
+				}
+				else
+				{
+					temp.setBounds(x+(i%5)*cardWidth, y+cardHeight*11/10*(i/5), cardWidth, cardHeight);
+				}
+				temp.draw(batch);
+				//draws the name
+				GlyphLayout temp3 = new GlyphLayout(font, hand.get(i).getName()+"");
+				font.draw(batch, temp3, temp.getX()+temp.getWidth()/2-temp3.width/2, temp.getY()+temp.getHeight()-font.getCapHeight());
+				//draws the cost of the card
+				float currentY = temp.getY()+temp.getHeight()-font.getCapHeight()*4;
+				for(int j=0;j<hand.get(i).getResourceCost();j++)
+				{
+					Sprite temp2 = new Sprite(manager.get("resource.png", Texture.class));
+					temp2.setBounds(temp.getX()+font.getCapHeight()*0.5f, currentY, font.getCapHeight(), font.getCapHeight());
+					temp2.draw(batch);
+					currentY-=font.getCapHeight();
+				}
+				currentY = temp.getY()+temp.getHeight()-font.getCapHeight()*4;
+				for(int j=0;j<hand.get(i).getElementCost(Element.AIR);j++)
+				{
+					Sprite temp2 = new Sprite(manager.get("air.png", Texture.class));
+					temp2.setBounds(temp.getX()+temp.getWidth()-font.getCapHeight()*1.5f, currentY, font.getCapHeight(), font.getCapHeight());
+					temp2.draw(batch);
+					currentY-=font.getCapHeight();
+				}
+				for(int j=0;j<hand.get(i).getElementCost(Element.EARTH);j++)
+				{
+					Sprite temp2 = new Sprite(manager.get("earth.png", Texture.class));
+					temp2.setBounds(temp.getX()+temp.getWidth()-font.getCapHeight()*1.5f, currentY, font.getCapHeight(), font.getCapHeight());
+					temp2.draw(batch);
+					currentY-=font.getCapHeight();
+				}
+				for(int j=0;j<hand.get(i).getElementCost(Element.FIRE);j++)
+				{
+					Sprite temp2 = new Sprite(manager.get("fire.png", Texture.class));
+					temp2.setBounds(temp.getX()+temp.getWidth()-font.getCapHeight()*1.5f, currentY, font.getCapHeight(), font.getCapHeight());
+					temp2.draw(batch);
+					currentY-=font.getCapHeight();
+				}
+				for(int j=0;j<hand.get(i).getElementCost(Element.WATER);j++)
+				{
+					Sprite temp2 = new Sprite(manager.get("water.png", Texture.class));
+					temp2.setBounds(temp.getX()+temp.getWidth()-font.getCapHeight()*1.5f, currentY, font.getCapHeight(), font.getCapHeight());
+					temp2.draw(batch);
+					currentY-=font.getCapHeight();
+				}
+				//draws the description
+				fontSmall.draw(batch, hand.get(i).getDescription()+"", temp.getX()+font.getCapHeight()*2, temp.getY()+temp.getHeight()-font.getCapHeight()*3, temp.getWidth()-font.getCapHeight()*4, 1, true);
 			}
 			else
 			{
-				temp.setBounds(x+(i%5)*cardWidth, y+cardHeight*11/10*(i/5), cardWidth, cardHeight);
-			}
-			temp.draw(batch);
-			GlyphLayout temp3 = new GlyphLayout(font, hand.get(i).getName()+"");
-			font.draw(batch, temp3, temp.getX()+temp.getWidth()/2-temp3.width/2, temp.getY()+temp.getHeight()-temp.getHeight()/15+temp3.height/2);
-			float currentX = temp.getX()+temp.getWidth()/8;
-			for(int j=0;j<hand.get(i).getResourceCost();j++)
-			{
-				Sprite temp2 = new Sprite(manager.get("resource.png", Texture.class));
-				temp2.setBounds(currentX, temp.getY()+temp.getHeight()*17/20, temp.getWidth()/13.33f, temp.getHeight()/20);
-				temp2.draw(batch);
-				currentX+=temp.getWidth()/13.33f;
-			}
-			for(int j=0;j<hand.get(i).getElementCost(Element.AIR);j++)
-			{
-				Sprite temp2 = new Sprite(manager.get("air.png", Texture.class));
-				temp2.setBounds(currentX, temp.getY()+temp.getHeight()*17/20, temp.getWidth()/13.33f, temp.getHeight()/20);
-				temp2.draw(batch);
-				currentX+=temp.getWidth()/13.33f;
-			}
-			for(int j=0;j<hand.get(i).getElementCost(Element.EARTH);j++)
-			{
-				Sprite temp2 = new Sprite(manager.get("earth.png", Texture.class));
-				temp2.setBounds(currentX, temp.getY()+temp.getHeight()*17/20, temp.getWidth()/13.33f, temp.getHeight()/20);
-				temp2.draw(batch);
-				currentX+=temp.getWidth()/13.33f;
-			}
-			for(int j=0;j<hand.get(i).getElementCost(Element.FIRE);j++)
-			{
-				Sprite temp2 = new Sprite(manager.get("fire.png", Texture.class));
-				temp2.setBounds(currentX, temp.getY()+temp.getHeight()*17/20, temp.getWidth()/13.33f, temp.getHeight()/20);
-				temp2.draw(batch);
-				currentX+=temp.getWidth()/13.33f;
-			}
-			for(int j=0;j<hand.get(i).getElementCost(Element.WATER);j++)
-			{
-				Sprite temp2 = new Sprite(manager.get("water.png", Texture.class));
-				temp2.setBounds(currentX, temp.getY()+temp.getHeight()*17/20, temp.getWidth()/13.33f, temp.getHeight()/20);
-				temp2.draw(batch);
-				currentX+=temp.getWidth()/13.33f;
-			}
-			font.draw(batch, hand.get(i).getDescription()+"", temp.getX()+temp.getWidth()/10, temp.getY()+temp.getHeight()-temp.getHeight()/5, temp.getWidth()*8/10, 1, true);
-			if(hand.get(i) instanceof UnitCard)
-			{
-				try
+				Sprite temp;
+				//determining which texture to use and draws it
+				if(hand.get(i).getElementCost(Element.AIR)>0&&hand.get(i).getElementCost(Element.EARTH)==0&&
+				hand.get(i).getElementCost(Element.FIRE)==0&&hand.get(i).getElementCost(Element.WATER)==0)
 				{
-					Unit unit = ((UnitCard)hand.get(i)).createUnit(-1, -1);
-					temp3.setText(font, unit.getAttack()+"");
-					font.draw(batch, temp3, temp.getX()+temp.getWidth()/4-temp3.width/2, temp.getY()+temp.getHeight()/10+temp3.height/2);
-					temp3.setText(font, unit.getBaseCountdown()+"");
-					font.draw(batch, temp3, temp.getX()+temp.getWidth()/2-temp3.width/2, temp.getY()+temp.getHeight()/10+temp3.height/2);
-					temp3.setText(font, unit.getMaximumHealth()+"");
-					font.draw(batch, temp3, temp.getX()+temp.getWidth()*3/4-temp3.width/2, temp.getY()+temp.getHeight()/10+temp3.height/2);
+					temp = new Sprite(manager.get("airunit.png", Texture.class));
 				}
-				catch(InstantiationException e){e.printStackTrace();}
-				catch(IllegalAccessException e){e.printStackTrace();}
-				catch(IllegalArgumentException e){e.printStackTrace();}
-				catch(InvocationTargetException e){e.printStackTrace();}
-				catch(SecurityException e){e.printStackTrace();}
+				else if(hand.get(i).getElementCost(Element.AIR)==0&&hand.get(i).getElementCost(Element.EARTH)>0&&
+				hand.get(i).getElementCost(Element.FIRE)==0&&hand.get(i).getElementCost(Element.WATER)==0)
+				{
+					temp = new Sprite(manager.get("earthunit.png", Texture.class));
+				}
+				else if(hand.get(i).getElementCost(Element.AIR)==0&&hand.get(i).getElementCost(Element.EARTH)==0&&
+				hand.get(i).getElementCost(Element.FIRE)>0&&hand.get(i).getElementCost(Element.WATER)==0)
+				{
+					temp = new Sprite(manager.get("fireunit.png", Texture.class));
+				}
+				else if(hand.get(i).getElementCost(Element.AIR)==0&&hand.get(i).getElementCost(Element.EARTH)==0&&
+				hand.get(i).getElementCost(Element.FIRE)==0&&hand.get(i).getElementCost(Element.WATER)>0)
+				{
+					temp = new Sprite(manager.get("waterunit.png", Texture.class));
+				}
+				else
+				{
+					temp = new Sprite(manager.get("neutralunit.png", Texture.class));
+				}
+				if(i==highlightedIndex)
+				{
+					temp.setBounds(x+(i%5)*cardWidth, y+cardHeight*11/10*(i/5)+cardHeight/10, cardWidth, cardHeight);
+				}
+				else
+				{
+					temp.setBounds(x+(i%5)*cardWidth, y+cardHeight*11/10*(i/5), cardWidth, cardHeight);
+				}
+				temp.draw(batch);
+				//draws the name
+				GlyphLayout temp3 = new GlyphLayout(font, hand.get(i).getName()+"");
+				font.draw(batch, temp3, temp.getX()+temp.getWidth()/2-temp3.width/2, temp.getY()+temp.getHeight()-font.getCapHeight());
+				//draws the cost of the card
+				float currentY = temp.getY()+temp.getHeight()-font.getCapHeight()*4;
+				for(int j=0;j<hand.get(i).getResourceCost();j++)
+				{
+					Sprite temp2 = new Sprite(manager.get("resource.png", Texture.class));
+					temp2.setBounds(temp.getX()+font.getCapHeight()*0.5f, currentY, font.getCapHeight(), font.getCapHeight());
+					temp2.draw(batch);
+					currentY-=font.getCapHeight();
+				}
+				currentY = temp.getY()+temp.getHeight()-font.getCapHeight()*4;
+				for(int j=0;j<hand.get(i).getElementCost(Element.AIR);j++)
+				{
+					Sprite temp2 = new Sprite(manager.get("air.png", Texture.class));
+					temp2.setBounds(temp.getX()+temp.getWidth()-font.getCapHeight()*1.5f, currentY, font.getCapHeight(), font.getCapHeight());
+					temp2.draw(batch);
+					currentY-=font.getCapHeight();
+				}
+				for(int j=0;j<hand.get(i).getElementCost(Element.EARTH);j++)
+				{
+					Sprite temp2 = new Sprite(manager.get("earth.png", Texture.class));
+					temp2.setBounds(temp.getX()+temp.getWidth()-font.getCapHeight()*1.5f, currentY, font.getCapHeight(), font.getCapHeight());
+					temp2.draw(batch);
+					currentY-=font.getCapHeight();
+				}
+				for(int j=0;j<hand.get(i).getElementCost(Element.FIRE);j++)
+				{
+					Sprite temp2 = new Sprite(manager.get("fire.png", Texture.class));
+					temp2.setBounds(temp.getX()+temp.getWidth()-font.getCapHeight()*1.5f, currentY, font.getCapHeight(), font.getCapHeight());
+					temp2.draw(batch);
+					currentY-=font.getCapHeight();
+				}
+				for(int j=0;j<hand.get(i).getElementCost(Element.WATER);j++)
+				{
+					Sprite temp2 = new Sprite(manager.get("water.png", Texture.class));
+					temp2.setBounds(temp.getX()+temp.getWidth()-font.getCapHeight()*1.5f, currentY, font.getCapHeight(), font.getCapHeight());
+					temp2.draw(batch);
+					currentY-=font.getCapHeight();
+				}
+				//draws the description
+				fontSmall.draw(batch, hand.get(i).getDescription()+"", temp.getX()+font.getCapHeight()*2, temp.getY()+temp.getHeight()-font.getCapHeight()*3, temp.getWidth()-font.getCapHeight()*4, 1, true);
 			}
 		}
 	}
