@@ -1,10 +1,8 @@
 package com.alvarpq.GOTF.gui;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.alvarpq.GOTF.coreGame.Element;
 import com.alvarpq.GOTF.coreGame.cards.Card;
 import com.alvarpq.GOTF.coreGame.cards.UnitCard;
-import com.alvarpq.GOTF.coreGame.units.Unit;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -44,7 +42,7 @@ public class Hand extends Actor
 		font.setColor(Color.BLACK);
 		BitmapFont fontSmall = manager.get("fontsmall.fnt", BitmapFont.class);
 		fontSmall.setColor(Color.BLACK);
-		for(int i=0;i<hand.size();i++)
+		for(int i = 0;i < hand.size(); i++)//iterates through hand.
 		{
 			//the variables are: temp = the sprite, temp2 = the resource sprite, temp3 = the glyphlayout for drawing centered text, don't blame me for names, blame libgdx
 			if(!(hand.get(i) instanceof UnitCard))
