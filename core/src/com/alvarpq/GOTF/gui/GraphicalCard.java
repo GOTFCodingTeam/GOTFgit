@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
 //actor to draw a card
 public class GraphicalCard extends Actor
 {
@@ -46,7 +47,7 @@ public class GraphicalCard extends Actor
 			if(!(card instanceof UnitCard))
 			{
 				Sprite temp;
-				//determining which texture to use and draws it
+				//determining which texture to use and draws it MEANING CARD BACKGROUND. 
 				if(card.getElementCost(Element.AIR)>0&&card.getElementCost(Element.EARTH)==0&&
 				card.getElementCost(Element.FIRE)==0&&card.getElementCost(Element.WATER)==0)
 				{
@@ -74,9 +75,10 @@ public class GraphicalCard extends Actor
 				temp.setBounds(x, y, cardWidth, cardHeight);
 				temp.draw(batch);
 				//draws the name
-				GlyphLayout temp3 = new GlyphLayout(font, card.getName()+"");
+				GlyphLayout temp3 = new GlyphLayout(font, card.getName() + "");
 				font.draw(batch, temp3, temp.getX()+temp.getWidth()/2-temp3.width/2, temp.getY()+temp.getHeight()-font.getCapHeight());
-				//draws the cost of the card
+			
+				//draws the cost of the card, on the card itself.
 				float currentY = temp.getY()+temp.getHeight()-font.getCapHeight()*4;
 				for(int j=0;j<card.getResourceCost();j++)
 				{
